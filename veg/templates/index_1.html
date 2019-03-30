@@ -1,0 +1,21 @@
+<html>
+<div>
+<a href="#" class="myButton">Predict</a>
+</div>
+<div>
+<h1 id="result"></h1>
+</div>
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'></script>
+<script type="text/javascript">
+$(".myButton").click(function(){
+	var $SCRIPT_ROOT = {{request.script_root|tojson|safe}};
+	$.ajax({
+			type:"GET",
+			url: $SCRIPT_ROOT + "/predict",
+			success: function(data){
+				$('#result').text('Predicted Demand: '+data);
+			}
+		});
+	});
+</script>
+</html>

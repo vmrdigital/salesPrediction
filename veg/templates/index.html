@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Flask app</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+<body>
+<header>
+<div class="container">
+        <h1 class="logo">Veggiekart's Demand Prediction Web App powered by Python/Flask</h1>
+        <strong><nav>
+          <ul class="menu">
+            
+          </ul>
+        </nav></strong>
+      </div>
+</header>
+<div>
+
+<p>Click to predict Demand for the day</p>
+<a href="#" class="myButton">Predict</a>
+</div>
+</body>
+
+<div>
+<h1 id="result"></h1>
+</div>
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'></script>
+<script type="text/javascript">
+$(".myButton").click(function(){
+	var $SCRIPT_ROOT = {{request.script_root|tojson|safe}};
+	$.ajax({
+			type:"GET",
+			url: $SCRIPT_ROOT + "/predict",
+			success: function(data){
+				$('#result').text('Predicted Demand: '+data);
+			}
+		});
+	});
+</script>
+</html>
